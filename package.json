@@ -1,0 +1,30 @@
+{
+  "name": "playwright-docker-hang-repro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Brianzchen/playwright-docker-hang-repro.git",
+  "author": "Brian Chen <brian.chen@gbst.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "@playwright/test": "^1.37.1",
+    "babel-loader": "^9.1.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "scripts": {
+    "start": "yarn webpack serve --config website/webpack.config.js",
+    "test:vr": "playwright test",
+    "test:vr-docker-build": "docker build -t playwright -f vr-test.Dockerfile .",
+    "test:vr-unix": "yarn test:vr-docker-build && docker run -v $(pwd):/app -u $(id -u $(whoami)) playwright",
+    "test:vr-windows": "yarn test:vr-docker-build && docker run playwright",
+    "test:vr-windows-with-volume": "yarn test:vr-docker-build && docker run playwright"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
