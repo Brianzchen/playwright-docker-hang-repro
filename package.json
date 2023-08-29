@@ -21,7 +21,7 @@
     "test:vr-docker-build": "docker build -t playwright -f vr-test.Dockerfile .",
     "test:vr-unix": "yarn test:vr-docker-build && docker run -v $(pwd):/app -u $(id -u $(whoami)) playwright",
     "test:vr-windows": "yarn test:vr-docker-build && docker run playwright",
-    "test:vr-windows-with-volume": "yarn test:vr-docker-build && docker run playwright"
+    "test:vr-windows-with-volume": "yarn test:vr-docker-build && docker run -v $(pwd):/app playwright"
   },
   "dependencies": {
     "react": "^18.2.0",
